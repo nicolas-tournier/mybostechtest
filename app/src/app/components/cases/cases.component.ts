@@ -1,7 +1,12 @@
 import { Component } from '@angular/core';
-import { map, Observable, tap } from 'rxjs';
-import { HomeService, ICaseListItems } from '../../services/home.service';
+import { map, Observable, of, tap } from 'rxjs';
+import { HomeService, ICaseListItem } from '../../services/home.service';
 import { TableLazyLoadEvent, TablePageEvent, TableRowSelectEvent } from 'primeng/table';
+
+export interface ITableCaseList {
+  total: number;
+  caseList: ICaseListItem[]
+}
 
 export const numberOfRows = 10;
 export const rowsPerPageOptions = [5, 10, 25, 100];
@@ -14,7 +19,7 @@ export const rowsPerPageOptions = [5, 10, 25, 100];
 
 export class CasesComponent {
 
-  casesList$: Observable<ICaseListItems> = this.homeService.caseList$.pipe(
+  casesList$: Observable<ITableCaseList> = this.homeService.caseList$.pipe(
     tap(data => {
       this.totalRecords = data.total;
     }),
@@ -26,14 +31,15 @@ export class CasesComponent {
           dateAdded: this.formatDate(item.dateAdded),
           dueDate: this.formatDate(item.dueDate),
           updatedAt: this.formatDate(item.updatedAt)
-        }))
-      } as ICaseListItems
+        })).slice(this.currentPage - 1, this.currentPage + this.numberOfRows)
+      }
     })
   );
   loading$: Observable<boolean> = this.homeService.loading$;
   numberOfRows = numberOfRows;
   rowsPerPageOptions = rowsPerPageOptions;
   totalRecords: number;
+  currentPage: number = 1;
 
   tableStyle = {
     'min-width': '20rem',
@@ -49,12 +55,9 @@ export class CasesComponent {
     console.log('selected ', event);
   }
 
-  onPageChange(event: TablePageEvent) {
-    console.log('paged ', event);
-  }
-
   onLoadData(event: TableLazyLoadEvent) {
-    this.homeService.getCasesList(this.numberOfRows, (event.first! / event.rows!) + 1);
+    this.currentPage = (event.first! / event.rows!) + 1;
+    this.homeService.getCasesList(this.numberOfRows, (this.currentPage));
   }
 
   private formatDate(dateString: string) {

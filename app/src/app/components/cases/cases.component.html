@@ -2,9 +2,9 @@
   <div class="table">
     <p-table [value]="cases.caseList" selectionMode="single" dataKey="id" [rows]="numberOfRows" [showCurrentPageReport]="true"
       [totalRecords]="cases.total" [lazyLoadOnInit]="false" [lazy]="true" [rowsPerPageOptions]="rowsPerPageOptions"
-      [loading]="!!(loading$ | async)" [paginator]="true" [tableStyle]="tableStyle" (onPage)="onPageChange($event)"
+      [loading]="!!(loading$ | async)" [paginator]="true" [tableStyle]="tableStyle"
       (onRowSelect)="onCaseSelected($event)" (onLazyLoad)="onLoadData($event)"
-      currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
+      currentPageReportTemplate="Showing {first} to {last} of {totalRecords} cases">
       <ng-template pTemplate="header">
         <tr>
           <th>Cases#</th>
@@ -27,11 +27,6 @@
           <td>{{case.category}}</td>
           <td class="nowrap-cell">{{case.updatedAt}}</td>
           <td class="nowrap-cell">{{case.reporter}}</td>
-        </tr>
-      </ng-template>
-      <ng-template pTemplate="emptymessage">
-        <tr>
-          <td colspan="7">No cases found.</td>
         </tr>
       </ng-template>
     </p-table>
