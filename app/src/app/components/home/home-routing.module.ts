@@ -2,11 +2,18 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { CasesComponent } from '../cases/cases.component';
 import { CasesDetailsComponent } from '../cases-details/cases-details.component';
+import { HomeComponent } from './home.component';
 
 const homeRoutes: Routes = [
-  { path: '', redirectTo: 'cases', pathMatch: 'full' },
-  { path: 'cases', component: CasesComponent },
-  { path: 'cases/:id', component: CasesDetailsComponent },
+  {
+    path: '',
+    component: HomeComponent,
+    children: [
+      { path: '', pathMatch: 'full', redirectTo: 'cases' },
+      { path: 'cases', component: CasesComponent },
+      { path: 'cases/:id', component: CasesDetailsComponent },
+    ]
+  }
 ];
 
 @NgModule({
@@ -14,4 +21,7 @@ const homeRoutes: Routes = [
   exports: [RouterModule],
 })
 
-export class HomeRoutingModule { }
+export class HomeRoutingModule {
+  constructor() {
+  }
+}

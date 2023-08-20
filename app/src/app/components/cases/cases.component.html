@@ -1,1 +1,39 @@
-<p>cases works!</p>
+<ng-container *ngIf="(casesList$ | async) as cases">
+  <div class="table">
+    <p-table [value]="cases.caseList" selectionMode="single" dataKey="id" [rows]="numberOfRows" [showCurrentPageReport]="true"
+      [totalRecords]="cases.total" [lazyLoadOnInit]="false" [lazy]="true" [rowsPerPageOptions]="rowsPerPageOptions"
+      [loading]="!!(loading$ | async)" [paginator]="true" [tableStyle]="tableStyle" (onPage)="onPageChange($event)"
+      (onRowSelect)="onCaseSelected($event)" (onLazyLoad)="onLoadData($event)"
+      currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Cases#</th>
+          <th>Case Title</th>
+          <th>Sent To</th>
+          <th>Contact Name</th>
+          <th>Status</th>
+          <th>Case Type</th>
+          <th>Sent</th>
+          <th>Sent By</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-case>
+        <tr [pSelectableRow]="case">
+          <td>{{case.caseNumber}}</td>
+          <td>{{case.subject}}</td>
+          <td>{{case.contractor}}</td>
+          <td>{{case.contractorContact}}</td>
+          <td class="nowrap-cell">{{case.status}}</td>
+          <td>{{case.category}}</td>
+          <td class="nowrap-cell">{{case.updatedAt}}</td>
+          <td class="nowrap-cell">{{case.reporter}}</td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="emptymessage">
+        <tr>
+          <td colspan="7">No cases found.</td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</ng-container>

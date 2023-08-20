@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router'
+import { HomeService } from 'src/app/services/home.service';
 
 @Component({
   selector: 'app-cases-details',
@@ -7,10 +7,10 @@ import { ActivatedRoute } from '@angular/router'
   styleUrls: ['./cases-details.component.css']
 })
 export class CasesDetailsComponent implements OnInit {
-  id: string | null
-  constructor(private route: ActivatedRoute) {}
+
+  constructor(private homeService: HomeService) {}
 
   ngOnInit(): void {
-    this.id = this.route.snapshot.paramMap.get('id')
+
   }
 }
