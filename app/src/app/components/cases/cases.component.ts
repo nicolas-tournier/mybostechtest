@@ -4,7 +4,6 @@ import { HomeService, ICaseListItem } from '../../services/home.service';
 import { TableLazyLoadEvent } from 'primeng/table';
 import { ActivatedRoute, Router } from '@angular/router';
 import { formatTableDate } from 'src/app/utils/dates';
-
 export interface ITableCaseList {
   total: number;
   caseList: ICaseListItem[]
