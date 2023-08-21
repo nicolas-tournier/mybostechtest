@@ -15,8 +15,6 @@ import { StoreModule } from '@ngrx/store';
 import { casesReducer } from 'src/app/store/cases.reducer';
 import { CasesDataEffects } from 'src/app/store/cases.effects';
 
-
-
 @NgModule({
   declarations: [
     HomeComponent,

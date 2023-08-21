@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { HomeService } from '../../services/home.service';
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -7,10 +8,15 @@ import { HomeService } from '../../services/home.service';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private homeService: HomeService) { }
+  heading: string;
+
+  constructor(private router: Router) {
+    this.router.events.subscribe(() => {
+      this.heading = this.router.url === '/home/cases' ? 'Cases' : 'Case Information';
+    })
+  }
 
   ngOnInit(): void {
-    // nothing to do here for now as this is just
-    // a container to allow other components to persist if required
+
   }
 }

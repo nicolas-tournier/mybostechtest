@@ -8,6 +8,11 @@ export const currentCaseList = createSelector(
   state => ({ caseList: state.caseList, total: state.total })
 );
 
+export const currentCaseListItem = createSelector(
+  caseListState,
+  state => (state.caseList.find(item => item.id === state.currentSelectedCaseId))
+);
+
 export const isLoading = createSelector(
   caseListState,
   state => state.isLoading

@@ -1,17 +1,19 @@
 import { createReducer, on } from "@ngrx/store";
 import { ICaseListItem } from "../services/home.service";
-import { LoadCasesData, LoadCasesDataSuccess } from "./cases.actions";
+import { LoadCasesData, LoadCasesDataSuccess, SetCurrentSelectedCaseId } from "./cases.actions";
 
 export interface ICasesState {
   caseList: ICaseListItem[];
   loadedPages: Array<number>;
   total: number;
+  currentSelectedCaseId: string;
   isLoading: boolean;
 }
 
 const initialState: ICasesState =
 {
   caseList: [],
+  currentSelectedCaseId: '',
   loadedPages: [],
   total: 0,
   isLoading: false
@@ -33,4 +35,10 @@ export const casesReducer = createReducer<ICasesState>(
       isLoading: false
     }
   }),
+  on(SetCurrentSelectedCaseId, (state, action): ICasesState => {
+      return {
+        ...state,
+        currentSelectedCaseId: action.payload.caseId
+      }
+  })
 );

@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable, filter, tap } from 'rxjs';
-import { LoadCasesData } from 'src/app/store/cases.actions';
-import { currentCaseList, isLoading } from 'src/app/store/cases.selectors';
+import { Observable, filter } from 'rxjs';
+import { LoadCasesData, SetCurrentSelectedCaseId } from 'src/app/store/cases.actions';
+import { currentCaseList, currentCaseListItem, isLoading } from 'src/app/store/cases.selectors';
 
 export interface ICaseListItems {
   total: number;
@@ -38,11 +38,18 @@ export class HomeService {
     filter(data => data.caseList.length > 0)
   );
 
+  caseDetail$: Observable<ICaseListItem> = this.store.select(currentCaseListItem);
+
   loading$: Observable<boolean> = this.store.select(isLoading);
 
   constructor(private store: Store) { }
 
   getCasesList(perPage: number, page: number): void {
     this.store.dispatch(LoadCasesData({ payload: { perPage, page } }));
+  }
+
+  setCurrentlySelectedCaseId(caseId: string): void {
+    console.log('caseid ', caseId);
+    this.store.dispatch(SetCurrentSelectedCaseId({ payload: { caseId: caseId } }));
   }
 }

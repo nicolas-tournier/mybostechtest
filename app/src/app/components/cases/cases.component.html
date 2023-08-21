@@ -1,20 +1,20 @@
 <ng-container *ngIf="(casesList$ | async) as cases">
   <div class="table">
-    <p-table [value]="cases.caseList" selectionMode="single" dataKey="id" [rows]="numberOfRows" [showCurrentPageReport]="true"
-      [totalRecords]="cases.total" [lazyLoadOnInit]="false" [lazy]="true" [rowsPerPageOptions]="rowsPerPageOptions"
+    <p-table [value]="cases.caseList" selectionMode="single" dataKey="id" [rows]="numberOfRows"
+      [showCurrentPageReport]="true" [totalRecords]="cases.total" [lazyLoadOnInit]="false" [lazy]="true"
       [loading]="!!(loading$ | async)" [paginator]="true" [tableStyle]="tableStyle"
       (onRowSelect)="onCaseSelected($event)" (onLazyLoad)="onLoadData($event)"
       currentPageReportTemplate="Showing {first} to {last} of {totalRecords} cases">
       <ng-template pTemplate="header">
         <tr>
-          <th>Cases#</th>
-          <th>Case Title</th>
-          <th>Sent To</th>
-          <th>Contact Name</th>
-          <th>Status</th>
-          <th>Case Type</th>
-          <th>Sent</th>
-          <th>Sent By</th>
+          <th style="width:5%">Case #</th>
+          <th style="width:20%">Case Title</th>
+          <th style="width:15%">Sent To</th>
+          <th style="width:15%">Contact Name</th>
+          <th style="width:10%">Status</th>
+          <th style="width:10%">Case Type</th>
+          <th style="width:10%">Sent</th>
+          <th style="width:15%">Sent By</th>
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-case>

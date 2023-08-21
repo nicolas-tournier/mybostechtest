@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
-import { map, Observable, of, tap } from 'rxjs';
+import { map, Observable, tap } from 'rxjs';
 import { HomeService, ICaseListItem } from '../../services/home.service';
-import { TableLazyLoadEvent, TablePageEvent, TableRowSelectEvent } from 'primeng/table';
+import { TableLazyLoadEvent } from 'primeng/table';
+import { ActivatedRoute, Router } from '@angular/router';
+import { formatDate } from 'src/app/utils/dates';
 
 export interface ITableCaseList {
   total: number;
@@ -28,9 +30,9 @@ export class CasesComponent {
         total: data.total,
         caseList: data.caseList.map(item => ({
           ...item,
-          dateAdded: this.formatDate(item.dateAdded),
-          dueDate: this.formatDate(item.dueDate),
-          updatedAt: this.formatDate(item.updatedAt)
+          dateAdded: formatDate(item.dateAdded),
+          dueDate: formatDate(item.dueDate),
+          updatedAt: formatDate(item.updatedAt)
         })).slice(this.currentPage - 1, this.currentPage + this.numberOfRows)
       }
     })
@@ -48,27 +50,20 @@ export class CasesComponent {
     'font-size': '14px',
     'color': '#212529'
   }
-  constructor(private homeService: HomeService) {
+  constructor(private homeService: HomeService, private router: Router, private activatedRoute: ActivatedRoute) {
     this.homeService.getCasesList(10, 1);
+
   }
-  onCaseSelected(event: TableRowSelectEvent) {
-    console.log('selected ', event);
+  // theres something wrong with TableRowSelectEvent
+  // in that its type epects data to be an array
+  // yet the event produces an object literal, so using 'any'
+  onCaseSelected(event: any) {
+    this.router.navigate([event.data.id], { relativeTo: this.activatedRoute });
+    this.homeService.setCurrentlySelectedCaseId(event.data.id);
   }
 
   onLoadData(event: TableLazyLoadEvent) {
     this.currentPage = (event.first! / event.rows!) + 1;
     this.homeService.getCasesList(this.numberOfRows, (this.currentPage));
-  }
-
-  private formatDate(dateString: string) {
-    const date = new Date(dateString);
-    const day = date.getDate().toString().padStart(2, '0');
-    const month = (date.getMonth() + 1).toString().padStart(2, '0');
-    const year = date.getFullYear();
-    const hours = ((date.getHours() + 11) % 12 + 1).toString().padStart(2, '0');
-    const minutes = date.getMinutes().toString().padStart(2, '0');
-    const ampm = date.getHours() >= 12 ? 'pm' : 'am';
-    const formattedDate = `${day}/${month}/${year} ${hours}:${minutes}${ampm}`;
-    return formattedDate;
   }
 }
