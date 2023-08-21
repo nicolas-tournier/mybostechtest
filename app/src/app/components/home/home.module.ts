@@ -14,16 +14,20 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { casesReducer } from 'src/app/store/cases.reducer';
 import { CasesDataEffects } from 'src/app/store/cases.effects';
+import { ReactiveFormsModule } from '@angular/forms';
+import { FormCellComponent } from '../shared/form-cell/form-cell.component';
 
 @NgModule({
   declarations: [
     HomeComponent,
     CasesComponent,
-    CasesDetailsComponent
+    CasesDetailsComponent,
+    FormCellComponent
   ],
   imports: [
     CommonModule,
     HomeRoutingModule,
+    ReactiveFormsModule,
     TableModule,
     ProgressBarModule,
     TagModule,

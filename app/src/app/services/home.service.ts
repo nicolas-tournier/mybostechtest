@@ -49,7 +49,6 @@ export class HomeService {
   }
 
   setCurrentlySelectedCaseId(caseId: string): void {
-    console.log('caseid ', caseId);
     this.store.dispatch(SetCurrentSelectedCaseId({ payload: { caseId: caseId } }));
   }
 }

@@ -1,3 +1,58 @@
 <ng-container *ngIf="(caseDetail$ | async) as cases">
-
+  <form class="form" [formGroup]="caseDetailFormGroup">
+    <app-form-cell [formCellData]="{label: 'Case Information'}">
+      <section class="form-cell">
+        <div class="form-fields">
+          <div class="form-field">
+            <label for="caseNumber">Case Number</label>
+            <div class="form-field-control">
+              <input class="form-input" type="text" formControlName="caseNumber" id="caseNumber" />
+            </div>
+          </div>
+          <div class="form-field">
+            <label for="category">Case Type</label>
+            <div class="form-field-control">
+              <input class="form-input" type="text" formControlName="category" id="category"
+                placeholder="Required" />
+            </div>
+          </div>
+          <div class="form-field">
+            <label for="dateAdded">Added</label>
+            <div class="form-field-control">
+              <input class="form-input" type="text" formControlName="dateAdded" id="dateAdded"
+                placeholder="Required" />
+            </div>
+          </div>
+          <div class="form-field">
+            <label for="dueDate">Due Date</label>
+            <div class="form-field-control">
+              <input class="form-input" type="text" formControlName="dueDate" id="dueDate"
+                placeholder="Required" />
+            </div>
+          </div>
+          <div class="form-field">
+            <label for="priority">Priority</label>
+            <div class="form-field-control">
+              <input class="form-input" type="text" formControlName="priority" id="priority"
+                placeholder="Required" />
+            </div>
+          </div>
+          <div class="form-field">
+            <label for="status">Status</label>
+            <div class="form-field-control">
+              <input class="form-input" type="text" formControlName="status" id="status"
+                placeholder="Required" />
+            </div>
+          </div>
+        </div>
+      </section>
+    </app-form-cell>
+    <app-form-cell [formCellData]="{label: 'Asset Information'}">
+      <section class="form-cell">
+        <div class="form-fields">
+          Other form fields as required
+        </div>
+      </section>
+    </app-form-cell>
+  </form>
 </ng-container>

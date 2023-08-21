@@ -1,0 +1,41 @@
+.form-fields {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.form-field {
+  width: calc(50% - 2rem);
+  margin-right: 2rem;
+  margin-bottom: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.form-field-control {
+  border: 1px solid #dfe3e9;
+  border-radius: 4px;
+}
+
+label {
+  display: block;
+  margin: 0.25rem 0;
+}
+
+input {
+  padding: 0.75rem;
+  width: 100%;
+  border: none;
+  outline: none;
+}
+
+input::placeholder {
+  font-style: italic;
+  font-size: 16px;
+  margin-left: 0.5rem;
+}
+
+@media screen and (max-width: 800px) {
+  .form-field {
+    width: 100%;
+  }
+}

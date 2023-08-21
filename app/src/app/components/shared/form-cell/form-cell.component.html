@@ -1,0 +1,7 @@
+<section class="form-cell" *ngIf="formCellData">
+  <div class="form-cell-header">
+    <span class="form-cell-label">{{ formCellData.label }}</span>
+    <hr>
+  </div>
+  <ng-content [select]="formCellData.label"></ng-content>
+</section>

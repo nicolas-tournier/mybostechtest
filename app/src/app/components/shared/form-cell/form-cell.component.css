@@ -1,0 +1,23 @@
+.form-cell {
+  padding: 2rem;
+  margin-bottom: 1.5rem;
+  background-color: white;
+  border-radius: 4px;
+}
+
+.form-cell-header {
+  margin-bottom: 1rem;
+  font-weight: semi-bold;
+  font-size: 18px;
+  color: #2c2c2c;
+}
+
+.form-cell-label {
+  margin: 1rem 0;
+}
+
+hr {
+  border-color: #D1D8E3;
+  margin: 0.25rem 0;
+  border-top: 0.5px;
+}

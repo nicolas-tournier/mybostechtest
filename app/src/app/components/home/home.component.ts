@@ -12,7 +12,7 @@ export class HomeComponent implements OnInit {
 
   constructor(private router: Router) {
     this.router.events.subscribe(() => {
-      this.heading = this.router.url === '/home/cases' ? 'Cases' : 'Case Information';
+      this.heading = this.router.url === '/home/cases' ? 'Cases' : 'Case Item';
     })
   }
 

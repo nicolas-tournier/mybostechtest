@@ -3,7 +3,7 @@ import { map, Observable, tap } from 'rxjs';
 import { HomeService, ICaseListItem } from '../../services/home.service';
 import { TableLazyLoadEvent } from 'primeng/table';
 import { ActivatedRoute, Router } from '@angular/router';
-import { formatDate } from 'src/app/utils/dates';
+import { formatTableDate } from 'src/app/utils/dates';
 
 export interface ITableCaseList {
   total: number;
@@ -30,9 +30,9 @@ export class CasesComponent {
         total: data.total,
         caseList: data.caseList.map(item => ({
           ...item,
-          dateAdded: formatDate(item.dateAdded),
-          dueDate: formatDate(item.dueDate),
-          updatedAt: formatDate(item.updatedAt)
+          dateAdded: formatTableDate(item.dateAdded),
+          dueDate: formatTableDate(item.dueDate),
+          updatedAt: formatTableDate(item.updatedAt)
         })).slice(this.currentPage - 1, this.currentPage + this.numberOfRows)
       }
     })
