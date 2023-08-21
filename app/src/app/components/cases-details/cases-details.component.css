@@ -34,6 +34,10 @@ input::placeholder {
   margin-left: 0.5rem;
 }
 
+.is-disabled {
+  background-color: rgba(232, 235, 240, 0.5);
+}
+
 @media screen and (max-width: 800px) {
   .form-field {
     width: 100%;
